@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LogicFlow Canvas</title>
+    <!-- ReactFlow Core Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reactflow@11.11.4/dist/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              background: '#faf9f7',
+              node: {
+                bg: '#ffffff',
+                border: '#e5e7eb',
+                header: '#f3f4f6'
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+      body, html, #root {
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #faf9f7;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+      }
+      .react-flow__node {
+        border-radius: 20px !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+      }
+      
+      /* Handle Socket Styling */
+      .react-flow__handle {
+        width: 10px !important;
+        height: 10px !important;
+        background: #ffffff !important;
+        border: 2.5px solid #6366f1 !important; /* Indigo 500 */
+        box-shadow: 0 2px 4px rgba(99, 102, 241, 0.2);
+        z-index: 100 !important;
+        opacity: 0;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        pointer-events: none;
+      }
+      
+      /* Visibility: Show handles on selection, hover, OR when in global connect mode */
+      .react-flow__node.selected .react-flow__handle,
+      .react-flow__node:hover .react-flow__handle,
+      .connect-mode-active .react-flow__handle {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* Hovered Socket Feedback */
+      .react-flow__handle:hover {
+        transform: scale(1.6);
+        background: #6366f1 !important;
+        border-color: #ffffff !important;
+        box-shadow: 0 0 12px rgba(99, 102, 241, 0.4);
+      }
+
+      /* Connecting Socket Animation */
+      .react-flow__handle.connecting {
+        animation: pulse-handle 1.5s infinite;
+      }
+
+      @keyframes pulse-handle {
+        0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+        70% { box-shadow: 0 0 0 8px rgba(99, 102, 241, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+      }
+
+      /* Offset handles to sit exactly on the border line */
+      .react-flow__handle-left { left: -5px !important; }
+      .react-flow__handle-right { right: -5px !important; }
+      .react-flow__handle-top { top: -5px !important; }
+      .react-flow__handle-bottom { bottom: -5px !important; }
+      
+      .react-flow__attribution {
+        display: none;
+      }
+      
+      /* Smooth Curved Dashed Edges */
+      .react-flow__edge-path {
+        stroke-width: 2.5;
+        stroke: #6366f1; 
+        stroke-dasharray: 6;
+      }
+
+      .react-flow__edge.selected .react-flow__edge-path {
+        stroke: #4338ca !important;
+        stroke-width: 3.5;
+        stroke-dasharray: 0; 
+      }
+
+      @keyframes dashdraw {
+        from { stroke-dashoffset: 24; }
+        to { stroke-dashoffset: 0; }
+      }
+
+      .react-flow__edge-path.animated {
+        stroke-dasharray: 6;
+        animation: dashdraw 0.6s linear infinite !important;
+      }
+      
+      .react-flow__edge {
+        cursor: pointer;
+      }
+
+      .react-flow__background {
+        background-color: #faf9f7;
+      }
+
+      /* Scrollbar styling for internal node containers */
+      .node-scroll-area::-webkit-scrollbar {
+        width: 4px;
+      }
+      .node-scroll-area::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .node-scroll-area::-webkit-scrollbar-thumb {
+        background: #e5e7eb;
+        border-radius: 10px;
+      }
+      .node-scroll-area::-webkit-scrollbar-thumb:hover {
+        background: #d1d5db;
+      }
+    </style>
+    <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react/": "https://esm.sh/react@18.2.0/",
+    "react-dom": "https://esm.sh/react-dom@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "lucide-react": "https://esm.sh/lucide-react@0.446.0?external=react,react-dom",
+    "reactflow": "https://esm.sh/reactflow@11.11.4?external=react,react-dom",
+    "dagre": "https://esm.sh/dagre@0.8.5",
+    "reactflow/": "https://esm.sh/reactflow@^11.11.4/",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.37.0"
+  }
+}
+</script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

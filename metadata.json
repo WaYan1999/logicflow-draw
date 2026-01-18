@@ -1,0 +1,5 @@
+{
+  "name": "LogicFlow Canvas",
+  "description": "A high-fidelity logic node drawing canvas with a modern light theme, featuring drag-and-drop nodes, custom styling, and interactive connections.",
+  "requestFramePermissions": []
+}
